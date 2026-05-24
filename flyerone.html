@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Video Ad</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        /* FACEBOOK FRAME 4:5 */
+        .frame {
+            width: 1080px;
+            height: 1350px;
+            position: relative;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* BACKGROUND WITH CROSSFADE */
+        .bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transform: scale(1.05);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .bg.active {
+            opacity: 1;
+        }
+
+        /* OVERLAY TOP-LEFT */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 420px;
+            height: auto;
+            min-height: 32%;
+            padding: 35px 25px;
+            background: rgba(10, 26, 47, 0.85);
+            backdrop-filter: blur(6px);
+            border-bottom-right-radius: 12px;
+            color: #fff;
+            border: 1px solid rgba(236, 210, 163, 0.3);
+            z-index: 10;
+            padding: 30px 25px 40px;
+        }
+
+
+        .text-line {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+
+        .overlay img {
+            max-width: 90%;
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+
+        .overlay h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            color: #ecd2a3;
+            font-weight: 700;
+        }
+
+        .text-line {
+            font-size: 20px;
+
+        }
+
+
+
+        /* FLOAT LAYER - Under overlay */
+        .float-layer {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        /* CIRCLE - STARTS TOP CENTER */
+        .circle {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 2px solid #fff;
+            overflow: hidden;
+            left: 70%;
+            /* Center horizontally */
+            top: -250px;
+            /* Start above frame */
+            margin-left: -125px;
+            /* Offset half width to true center */
+            opacity: 0;
+            animation: dropThenLeft 10s linear infinite;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+
+
+        .circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* STAGGER: Launch a new circle every 3.5s */
+        .circle:nth-child(1) {
+            animation-delay: 0.5s;
+        }
+
+        /* Starts almost immediately */
+        .circle:nth-child(2) {
+            animation-delay: 3s;
+        }
+
+        .circle:nth-child(3) {
+            animation-delay: 5.5s;
+        }
+
+        .circle:nth-child(4) {
+            animation-delay: 8s;
+        }
+
+        /* SMOOTH ARC: DOWN THEN CURVE LEFT ~105 DEGREES */
+        /* SMOOTH ARC: DOWN THEN CURVE LEFT ~95-100 DEGREES */
+        @keyframes dropThenLeft {
+            0% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+
+            5% {
+                opacity: 1;
+            }
+
+            25% {
+                transform: translate(-20px, 250px);
+                opacity: 1;
+            }
+
+            45% {
+                transform: translate(-80px, 500px);
+                opacity: 1;
+            }
+
+            65% {
+                transform: translate(-220px, 680px);
+                opacity: 1;
+            }
+
+            /* Lowered from 700 */
+            85% {
+                transform: translate(-500px, 780px);
+                opacity: 1;
+            }
+
+            /* Lowered from 850 */
+            100% {
+                transform: translate(-850px, 830px);
+                opacity: 1;
+            }
+
+            /* Lowered from 980 */
+        }
+
+      .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container h2 {
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.container h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    width: 120px;
+    height: 2px;
+
+    background: #ecd2a3; /* luxury gold */
+    border-radius: 10px;
+}
+
+
+        #open {
+            color: #fff;
+            margin-bottom: -15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="frame">
+        <div class="bg active" id="bg1"></div>
+        <div class="bg" id="bg2"></div>
+
+        <div class="overlay">
+            <img src="images/perry-logo2026.png" alt="Logo"
+                style="width: 250px; margin-bottom: 20px; margin-left: 50px;">
+            <div class="container">
+                <h4>WE ARE</h4>
+                <h1 id="open">OPEN<h1>
+                        <h4>EVERYDAY</h4>
+                        <P>10AM - 6PM</P>
+            </div>
+            <div class="text-line">Bathrooms • Kitchens • Floors</div>
+            <div class="text-line">Phone: 876-817-3377</div>
+            <div class="text-line">Email: perrystiling@gmail.com</div>
+        </div>
+
+        <div class="float-layer">
+            <div class="circle"><img src="images/image8.jpeg"></div>
+            <div class="circle"><img src="images/image9.jpeg"></div>
+            <div class="circle"><img src="images/image10.jpeg"></div>
+            <div class="circle"><img src="images/image11.jpeg"></div>
+        </div>
+    </div>
+
+    <script>
+        const images = [
+            "images/image1.jpg",
+            "images/image2.jpg",
+            "images/image3.jpg",
+            "images/image4.jpg"
+        ];
+
+        const textLines = document.querySelectorAll('.text-line');
+        const bg1 = document.getElementById("bg1");
+        const bg2 = document.getElementById("bg2");
+
+        let currentBg = 1;
+        let imgIndex = 0;
+        let textIndex = 0;
+
+        bg1.style.backgroundImage = `url('${images[0]}')`;
+
+        // BACKGROUND CROSSFADE every 4s
+        setInterval(() => {
+            imgIndex = (imgIndex + 1) % images.length;
+
+            if (currentBg === 1) {
+                bg2.style.backgroundImage = `url('${images[imgIndex]}')`;
+                bg2.classList.add('active');
+                bg1.classList.remove('active');
+                currentBg = 2;
+            } else {
+                bg1.style.backgroundImage = `url('${images[imgIndex]}')`;
+                bg1.classList.add('active');
+                bg2.classList.remove('active');
+                currentBg = 1;
+            }
+        }, 4000);
+
+        // TEXT CYCLE every 3s
+        setInterval(() => {
+            textLines[textIndex].classList.remove('active');
+            textIndex = (textIndex + 1) % textLines.length;
+            textLines[textIndex].classList.add('active');
+        }, 3000);
+    </script>
+</body>
+
+</html>
